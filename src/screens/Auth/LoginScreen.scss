@@ -1,0 +1,122 @@
+$primary:rgb(90, 101, 255);
+$dark-grey:rgb(56, 159, 255);
+$ligth-grey:rgb(255, 255, 255);
+.auth__main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px;
+    height: 100vh;
+    width: 100vw;
+}
+.auth__content{
+    // width: 400px;
+    background: $dark-grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+.auth__box-container{
+    background-color: white;
+    box-shadow: 0px 3px $dark-grey;
+    border-radius: 2px;
+    width: 380px;
+    padding: 20px;
+}
+.auth__title{
+    color: darken($color:$ligth-grey, $amount: 2);
+    margin: 20px;
+}
+.auth__input{
+    color: $primary;
+    border: 0px;
+    border-bottom: 2px solid transparent;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 95%;
+    height: 20px;
+    // width: 100%;
+    transition: border-bottom .3s ease;
+    &:focus{
+        outline: none;
+        border-bottom: 2px solid $primary;
+    }
+}
+
+.auth__social-network{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top:20px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+.google-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #fff;
+    padding: 0 10px;
+    img{
+        margin-right: 10px;
+    }
+    &:hover{
+        cursor: pointer;
+        opacity: .85;
+    }
+}
+.auth__alert-error{
+    background-color: rgb(255, 129, 129);
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.btn__login{
+    width: 100%;
+    padding: 10px 0;
+    color: #222;
+    background: #fff;
+    outline: none;
+    border: #505bfc;
+}
+
+.link{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form__register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 450px;
+}
+
+.btn__register{
+    width: 100%;
+    padding: 10px 0;
+    background: #fff;
+    outline: none;
+    border: none;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width:700px) {
+    .auth__content{
+        width: 80%;
+    }
+    .form__register{
+        width: 95%;
+    }
+  }

@@ -1,0 +1,38 @@
+.container__detail{
+    // height: 99.9vh;
+    width: 100%;
+    animation: entrada .5s ease;
+    .title{
+        color:#fff;
+        padding-left: 10px;
+    }
+}
+.content__hero{
+    color: #fff;
+    background: #333;
+    h2{
+        // margin: 0 20px;
+    }
+}
+.details__description{
+    background: rgba(51, 51, 51, 0.561);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 10px 10px 10px rgba(51, 51, 51, 0.561),
+    -20px -10px 10px rgba(51, 51, 51, 0.561);
+}
+
+.content__genres{
+    display: flex;
+    gap: 20px;
+}
+
+@keyframes entrada {
+    0%{
+        opacity: .5;
+    }100%{
+        opacity: 1;
+    }
+}
