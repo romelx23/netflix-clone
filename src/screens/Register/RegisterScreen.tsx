@@ -23,7 +23,6 @@ export const RegisterScreen = () => {
 
   const isFormValid = () => {
     if (name.trim().length === 0) {
-      // dispatch(setError('name is required'))
       console.log("name is required");
       Swal.fire({
         title: "Nombre es Requerido",
@@ -31,11 +30,6 @@ export const RegisterScreen = () => {
       });
       return false;
     }
-    // else if(!validator.isEmail(email)){
-    //     dispatch(setError('Email is not valid'))
-    //     console.log('Email is not valid');
-    //     return false;
-    // }
     else if (password !== password2 || password.length < 5) {
       // dispatch(setError('password should be at least 6 characters and match each other'))
       console.log(
@@ -57,7 +51,7 @@ export const RegisterScreen = () => {
     return true;
   };
 
-  const handleRegister = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log(name, email, password, password2);
     if (isFormValid()) {
@@ -69,7 +63,7 @@ export const RegisterScreen = () => {
   };
   useEffect(() => {
     // console.log(user);
-    if (user.displayName) {
+    if (user.uid) {
       navigate("/");
     }
   }, [navigate, user]);
@@ -78,7 +72,7 @@ export const RegisterScreen = () => {
     <div className="auth__main">
       <div className="auth__content">
         <h3 className="auth__title">Register</h3>
-        <form onSubmit={()=>handleRegister} className="form__register">
+        <form onSubmit={(e)=>handleRegister(e)} className="form__register">
           {/* {
                     msgError && 
                     (

@@ -6,6 +6,7 @@ import YouTube from "react-youtube";
 import { movies } from "../../interfaces/moviesInterface";
 import "./Row.scss";
 import { loadMovies } from '../../actions/movies';
+import { useTrailer } from '../../hooks/useTrailer';
 const base_url = "https://image.tmdb.org/t/p/original";
 interface Props {
   title: string;
@@ -17,7 +18,7 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
   const navigate = useNavigate();
   const [movies, setMovies] = useState<movies[]>([]);
   const [slide, setSlide] = useState(0);
-  const [trailer, setTrailer] = useState("");
+  // const [trailer, setTrailer] = useState("");
   const dispatch=useDispatch()
   useEffect(() => {
     const fetchData = async () => {
@@ -53,26 +54,7 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
     navigate(`/detail/${id}`);
   };
 
-  const getMovie = async (search: string) => {
-    const resp = await fetch(search);
-    const data = await resp.json();
-    if (data.results.length !== 0) {
-      // console.log(data.results[0].key);
-      const key = data.results[0].key;
-      const yt_url = `https://www.youtube.com/embed/${key}`;
-      // console.log(yt_url);
-      setTrailer(yt_url);
-    }
-  };
-
-  const handlesMovie = (movie: movies) => {
-    // if (trailer) {
-    //   setTrailer('')
-    // } else {
-    const searchPath = `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=92f5fb7291380dcff63ba5a523e4452d&language=en-US`;
-    getMovie(searchPath);
-    // }
-  };
+  const {handlesMovie,trailer}=useTrailer()
   return (
     <div className="row">
       <h2>{title}</h2>

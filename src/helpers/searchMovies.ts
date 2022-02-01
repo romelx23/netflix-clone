@@ -3,7 +3,7 @@ const key="92f5fb7291380dcff63ba5a523e4452d";
 export const getMovie=async (movie_id:string)=>{
     const resp=await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${key}&language=en-US`)
     const data=await resp.json()
-    console.log(data);
+    // console.log(data);
     return data;
   }
 

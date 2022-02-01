@@ -52,8 +52,20 @@
     bottom: 0;
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width:970px) {
     .container__hero{
+        display: flex;
+        flex-direction: column;
         grid-template-columns: repeat(1,1fr);
+        height: 100%;
+        .content__overview{
+            height: 205px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        iframe{
+            aspect-ratio: 16/9;
+            width: 100%;
+        }
     }
 }

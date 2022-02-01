@@ -104,4 +104,15 @@ nav{
         padding: 10px;
         color: #fff;
     }
+    button{
+        font-size: 18px;
+        font-weight: 200;
+        color: #fff;
+        background: #444;
+        outline: none;
+        border: none;
+        &:hover{
+            cursor: pointer;
+        }
+    }
 }

@@ -42,3 +42,10 @@
     justify-content: center;
 
 }
+
+@media screen and (max-width:500px) {
+    .content__search__items{
+        height: 350px;
+        overflow-y: scroll;
+    }
+}

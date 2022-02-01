@@ -12,6 +12,7 @@ import { AuthContext } from "../../context/authContext";
 import { addList, delList } from "../../hooks/useAuth";
 import { ListContext } from "../../context/listContext";
 import Swal from "sweetalert2";
+import { useTrailer } from "../../hooks/useTrailer";
 
 export const DetailMovie = () => {
   const navigate = useNavigate();
@@ -20,13 +21,14 @@ export const DetailMovie = () => {
   // console.log({ movieId });
   const [movie, setMovie] = useState<movies>();
   const [similar, setSimilar] = useState<movies[]>([]);
-  const { list,setList } = useContext(ListContext);
+  const { list, setList } = useContext(ListContext);
   const repetido = list.filter((el) => el.id === movie?.id);
 
   const movieParam = async () => {
     const resp = await getMovie(`${movieId}`);
     setMovie(resp);
   };
+  const { handlesMovie, trailer } = useTrailer();
 
   const addListFavorite = () => {
     if (movie) {
@@ -40,10 +42,10 @@ export const DetailMovie = () => {
         });
       }
       if (repetido.length === 0) {
-        addList(id, backdrop_path, title, vote_average, user.uid).catch((e)=>{
-          console.log(e)
-        })
-        setList([...list,movie])
+        addList(id, backdrop_path, title, vote_average, user.uid).catch((e) => {
+          console.log(e);
+        });
+        setList([...list, movie]);
         console.log("presionado");
       }
     }
@@ -58,10 +60,7 @@ export const DetailMovie = () => {
     window.scrollTo(0, 0);
   }, [movieId]);
 
-  useEffect(() => {
-    
-  }, [repetido,setList]);
-  
+  useEffect(() => {}, [repetido, setList]);
 
   useEffect(() => {
     if (!user.displayName) {
@@ -87,7 +86,7 @@ export const DetailMovie = () => {
             <div className="container__hero">
               <div className="hero__description details__description">
                 <h1>{movie?.name || movie?.title || movie?.original_title}</h1>
-                <h2>{movie?.overview}</h2>
+                <h2 className="content__overview">{movie?.overview}</h2>
                 <div className="content__genres">
                   {movie?.genres.map((el) => {
                     return <h3>{el.name}</h3>;
@@ -96,7 +95,10 @@ export const DetailMovie = () => {
                 <h3>{movie?.vote_average}</h3>
                 <StarRaiting key={movie.id} start={movie?.vote_average || 0} />
                 <div className="content__btns">
-                  <button className="btn btn__play">
+                  <button
+                    className="btn btn__play"
+                    onClick={() => handlesMovie(movie)}
+                  >
                     <h2>Play</h2>
                     <i className="fas fa-play"></i>
                   </button>
@@ -109,6 +111,21 @@ export const DetailMovie = () => {
                     <></>
                   )}
                 </div>
+              </div>
+              <div className="">
+              {trailer.length !== 0 ? (
+              <div className="content__video">
+                <iframe
+                  width="560"
+                  height="315"
+                  src={trailer}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
+              </div>
+            ) : (
+              <></>
+            )}
               </div>
               <span className="shadow"></span>
             </div>

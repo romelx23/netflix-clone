@@ -24,7 +24,7 @@ export const LoginScreen = () => {
     password: "", //123456
   });
   const { email, password } = values;
-  const handleLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(email);
     // dispatch(startLoginEmailPassword(email,password))
@@ -73,7 +73,7 @@ export const LoginScreen = () => {
       <div className="auth__content">
         <h3 className="auth__title">Login</h3>
         <form
-          onSubmit={() => handleLogin}
+          onSubmit={(e) => handleLogin(e)}
           className="animate__animated animate__fadeIn animate__faster"
         >
           <input

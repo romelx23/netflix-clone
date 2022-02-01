@@ -7,9 +7,10 @@ import "./Navbar.scss";
 interface Props {}
 
 export const Navbar = () => {
-  const {user}=useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [look, setLook] = useState(false);
+  const [log, setLog] = useState(false);
   const detectScroll = () => {
     if (window.scrollY > 100) {
       setShow(true);
@@ -25,6 +26,9 @@ export const Navbar = () => {
   }, []);
   const showSearch = () => {
     setLook(!look);
+  };
+  const showRegister = () => {
+    setLog(!log);
   };
   return (
     <nav className={show ? "show" : ""}>
@@ -62,17 +66,21 @@ export const Navbar = () => {
       <div className="user__items">
         <i className="fas fa-search" onClick={showSearch}></i>
         <i className="fas fa-bell"></i>
-        <img
-        onClick={handleLogOut}
-          src={user.photoURL}
-          alt="avatar"
-        />
-        <i className="fas fa-chevron-down"></i>
+        <img src={user.photoURL} alt="avatar" />
+        <i className="fas fa-chevron-down" onClick={showRegister}></i>
       </div>
-      <div className="card__auth">
-        <Link to={"/auth/login"}>Login</Link>
-        <Link to={"/auth/register"}>Register</Link>
-      </div>
+      {log ? (
+        <div className="card__auth">
+          {user ? (
+            <button className="fass" onClick={handleLogOut}>Salir<i className="fas fa-sign-out-alt"></i></button>
+          ) : (
+            <Link to={"/auth/login"}>Login</Link>
+          )}
+          <Link to={"/auth/register"}>Register</Link>
+        </div>
+      ) : (
+        <></>
+      )}
     </nav>
   );
 };
